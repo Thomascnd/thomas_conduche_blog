@@ -25,7 +25,7 @@ const handle = mw({
     }) => {
       const user = await UserModel.query().findOne({ email })
 
-      if (!user) {
+      if (!user || !user.isActivate ) {
         throw new UnauthorizedError()
       }
 

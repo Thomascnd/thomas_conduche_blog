@@ -16,11 +16,11 @@ import { useSession } from "@/web/components/SessionContext"
     mutationFn: (id) => apiClient.delete(`/user/${id}`)
 
   })
-  const handleClickDelete = async (id) => {
+  const handleClickDelete = (id) => async() => {
     await deleteUser(id)
     await refetch()
   }
-  const handleClickUpdate = (id) => {
+  const handleClickUpdate = (id) => () =>{
     router.push(`/admin/updateUser/${id}`)
   }
   
@@ -52,10 +52,10 @@ import { useSession } from "@/web/components/SessionContext"
                   <td className="border px-4 py-2">{user.role}</td>
                   <td className="border px-4 py-2">{user.isActivate ? "yes" : "no"}</td>
                   <td className="border px-4 py-2">
-                    <Button onClick={() => handleClickDelete(user.id)}>Delete</Button>
+                    <Button onClick={handleClickDelete(user.id)}>Delete</Button>
                   </td>
                   <td className="border px-4 py-2">
-                    <Button onClick={() => handleClickUpdate(user.id)}>Update</Button>
+                    <Button onClick={handleClickUpdate(user.id)}>Update</Button>
                   </td>
                 </tr>
               ))}

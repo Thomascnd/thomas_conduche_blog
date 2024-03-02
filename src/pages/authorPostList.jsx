@@ -11,7 +11,7 @@ const PostListPage = () => {
     queryKey: ["authorPosts"],
     queryFn: () => apiClient(`/authorPosts`),
   })
-  const handleClickUpdate =  (id) => {
+  const handleClickUpdate =  (id) => () => {
     router.push(`/updatePost/${id}`)
   }
   
@@ -40,7 +40,7 @@ const PostListPage = () => {
                   <td className="border px-4 py-2"> {new Date(postItem.createdAt).toLocaleDateString()} </td>
                   <td className="border px-4 py-2"> {postItem.views} </td>
                   <td className="border px-4 py-2">
-                    <Button onClick={() => handleClickUpdate(postItem.id)}>Update</Button>
+                    <Button onClick={handleClickUpdate(postItem.id)}>Update</Button>
                   </td>
                 </tr>
               ))}

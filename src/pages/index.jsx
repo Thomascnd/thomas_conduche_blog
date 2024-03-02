@@ -8,7 +8,7 @@ const IndexPage = () => {
     queryKey: ["posts"],
     queryFn: () => apiClient("/posts"),
   })
-  const handleClickView = (id) => {
+  const handleClickView = (id) => () => {
     router.push(`/viewPost/${id}`)
   }
 
@@ -34,7 +34,7 @@ const IndexPage = () => {
                   <td className="border px-4 py-2"> {postItem.username} </td>
                   <td className="border px-4 py-2"> {new Date(postItem.createdAt).toLocaleDateString()} </td>
                   <td className="border px-4 py-2">
-                    <Button onClick={() => handleClickView(postItem.id)}>view</Button>
+                    <Button onClick={handleClickView(postItem.id)}>view</Button>
                   </td>
                 </tr>
               ))}
