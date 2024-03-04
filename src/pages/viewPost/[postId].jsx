@@ -48,7 +48,7 @@ const Post = () => {
             <p className="text-lg mb-4 text-gray-700">Par {post.username}</p>
             <p className="text-lg mb-4 text-gray-600">{post.description}</p>
             <p className="text-sm mb-4 text-gray-500">
-              Dernière mise à jour :{" "}
+              Dernière mise à jour :
               {new Date(post.updatedAt).toLocaleDateString()}
             </p>
             <h2 className="text-2xl font-bold mb-4 text-center text-blue-600">

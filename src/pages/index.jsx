@@ -19,8 +19,7 @@ const IndexPage = () => {
       ) : (
         <div>
           <h1 className="text-3xl font-bold mb-4 text-center">
-            {" "}
-            List of publications{" "}
+            List of publications
           </h1>
           <table className="table-auto text-lg mx-auto">
             <thead>
@@ -36,8 +35,7 @@ const IndexPage = () => {
                   <td className="border px-4 py-2"> {postItem.title} </td>
                   <td className="border px-4 py-2"> {postItem.username} </td>
                   <td className="border px-4 py-2">
-                    {" "}
-                    {new Date(postItem.createdAt).toLocaleDateString()}{" "}
+                    {new Date(postItem.createdAt).toLocaleDateString()}
                   </td>
                   <td className="border px-4 py-2">
                     <Button onClick={handleClickView(postItem.id)}>view</Button>
