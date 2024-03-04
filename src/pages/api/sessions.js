@@ -25,7 +25,7 @@ const handle = mw({
     }) => {
       const user = await UserModel.query().findOne({ email })
 
-      if (!user || !user.isActivate ) {
+      if (!user || !user.isActivate) {
         throw new UnauthorizedError()
       }
 
@@ -42,7 +42,7 @@ const handle = mw({
         {
           payload: {
             id: user.id,
-            role: user.role
+            role: user.role,
           },
         },
         config.security.jwt.secret,

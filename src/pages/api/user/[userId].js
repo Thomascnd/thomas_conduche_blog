@@ -1,7 +1,14 @@
 import mw from "@/api/mw"
-import { idValidator, usernameValidator, emailValidator, roleValidator, statusValidator } from "@/utils/validators"
+import {
+  idValidator,
+  usernameValidator,
+  emailValidator,
+  roleValidator,
+  statusValidator,
+} from "@/utils/validators"
 import { validate } from "@/api/middlewares/validate"
 import auth from "@/api/middlewares/auth"
+
 const handle = mw({
   GET: [
     auth,
@@ -15,12 +22,14 @@ const handle = mw({
       input: {
         query: { userId },
       },
-      session: {role},
+      session: { role },
       res,
     }) => {
-      if(role === "admin") {
-        const user = await UserModel.query().findById(userId).select("id", "username", "email", "role", "isActivate")
-        res.send(user) 
+      if (role === "admin") {
+        const user = await UserModel.query()
+          .findById(userId)
+          .select("id", "username", "email", "role", "isActivate")
+        res.send(user)
       }
     },
   ],
@@ -34,19 +43,19 @@ const handle = mw({
     async ({
       models: { UserModel },
       input: {
-        query : { userId },
+        query: { userId },
       },
-      session: {role},
+      session: { role },
       res,
     }) => {
-      if(role === "admin") {
+      if (role === "admin") {
         const user = await UserModel.query().findById(userId).throwIfNotFound()
         await user.$query().delete()
-        res.send(user) 
+        res.send(user)
       }
     },
   ],
-  PATCH:[
+  PATCH: [
     auth,
     validate({
       query: {
@@ -62,17 +71,23 @@ const handle = mw({
     async ({
       input: {
         query: { userId },
-        body: { username, email, role, isActivate},
+        body: { username, email, role, isActivate },
       },
       models: { UserModel },
-      session: {role: roleSession},
+      session: { role: roleSession },
       res,
     }) => {
-      if(roleSession === "admin") {
-        const updatedUser = await UserModel.query().patchAndFetchById(userId, { username, email, role, isActivate})
+      if (roleSession === "admin") {
+        const updatedUser = await UserModel.query().patchAndFetchById(userId, {
+          username,
+          email,
+          role,
+          isActivate,
+        })
         res.send({ result: updatedUser })
       }
-    }]
+    },
+  ],
 })
 
 export default handle

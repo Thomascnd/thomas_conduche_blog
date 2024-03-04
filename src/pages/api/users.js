@@ -1,6 +1,11 @@
 import { validate } from "@/api/middlewares/validate"
 import mw from "@/api/mw"
-import { emailValidator, passwordValidator, usernameValidator, roleValidator } from "@/utils/validators"
+import {
+  emailValidator,
+  passwordValidator,
+  usernameValidator,
+  roleValidator,
+} from "@/utils/validators"
 import auth from "@/api/middlewares/auth"
 
 const handle = mw({
@@ -28,9 +33,6 @@ const handle = mw({
         return
       }
 
-      // eslint-disable-next-line no-console
-      console.log(role)
-
       const [passwordHash, passwordSalt] =
         await UserModel.hashPassword(password)
 
@@ -45,18 +47,15 @@ const handle = mw({
       res.send({ result: true })
     },
   ],
-  GET : [ 
+  GET: [
     auth,
-    async ({
-      models: { UserModel },
-      res,
-    }) => {
-      const users = await UserModel.query().select("id", "username", "email", "role", "isActivate").orderBy("id")
+    async ({ models: { UserModel }, res }) => {
+      const users = await UserModel.query()
+        .select("id", "username", "email", "role", "isActivate")
+        .orderBy("id")
       res.send(users)
-    }
-  ],      
+    },
+  ],
 })
 
 export default handle
-
-

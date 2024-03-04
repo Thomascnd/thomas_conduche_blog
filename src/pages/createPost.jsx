@@ -6,7 +6,6 @@ import Link from "@/web/components/ui/Link"
 import { useSession } from "@/web/components/SessionContext"
 import Loader from "@/web/components/ui/Loader"
 
-
 const initialValues = {
   title: "",
   description: "",
@@ -24,9 +23,7 @@ const CreatePost = () => {
   if (isSuccess) {
     return (
       <div className="flex flex-col gap-4">
-        <Alert>
-          your post has been added
-        </Alert>
+        <Alert>your post has been added</Alert>
         <p>
           <Link href="/">Go to list post page.</Link>
         </p>
@@ -35,17 +32,20 @@ const CreatePost = () => {
   }
 
   return (
-    <div >
+    <div>
       {session && session.role !== "author" ? (
         <Loader />
       ) : (
         <>
           <h1 className="text-3xl font-bold mb-4 text-center"> Create Post</h1>
-          <InputForm initialValues={initialValues} handleSubmit={handleSubmit} />
+          <InputForm
+            initialValues={initialValues}
+            handleSubmit={handleSubmit}
+          />
         </>
       )}
     </div>
-  )    
+  )
 }
 
 export default CreatePost

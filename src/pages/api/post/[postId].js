@@ -1,6 +1,9 @@
-
 import mw from "@/api/mw"
-import { idValidator, titleValidator, descriptionValidator } from "@/utils/validators"
+import {
+  idValidator,
+  titleValidator,
+  descriptionValidator,
+} from "@/utils/validators"
 import { validate } from "@/api/middlewares/validate"
 import auth from "@/api/middlewares/auth"
 
@@ -18,11 +21,19 @@ const handle = mw({
       },
       res,
     }) => {
-      const post = await PostModel.query().select("title", "description", "posts.updatedAt", "user.username as username").joinRelated("user").where("posts.id", postId)
+      const post = await PostModel.query()
+        .select(
+          "title",
+          "description",
+          "posts.updatedAt",
+          "user.username as username",
+        )
+        .joinRelated("user")
+        .where("posts.id", postId)
       res.send(post[0])
     },
   ],
-  PATCH:[
+  PATCH: [
     auth,
     validate({
       query: {
@@ -36,18 +47,21 @@ const handle = mw({
     async ({
       input: {
         query: { postId },
-        body: { title, description},
+        body: { title, description },
       },
       models: { PostModel },
-      session: {role},
+      session: { role },
       res,
     }) => {
-      if(role === "author") {
-        const updatedPost = await PostModel.query().patchAndFetchById(postId, { title, description })
+      if (role === "author") {
+        const updatedPost = await PostModel.query().patchAndFetchById(postId, {
+          title,
+          description,
+        })
         res.send({ result: updatedPost })
       }
-    }]
+    },
+  ],
 })
 
 export default handle
-

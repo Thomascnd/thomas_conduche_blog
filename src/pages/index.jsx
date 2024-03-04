@@ -4,7 +4,7 @@ import Button from "@/web/components/ui/Button"
 import Loader from "@/web/components/ui/Loader"
 import router from "next/router"
 const IndexPage = () => {
-  const { isFetching :isFetchingPost, data : post,} = useQuery({
+  const { isFetching: isFetchingPost, data: post } = useQuery({
     queryKey: ["posts"],
     queryFn: () => apiClient("/posts"),
   })
@@ -18,7 +18,10 @@ const IndexPage = () => {
         <Loader />
       ) : (
         <div>
-          <h1 className="text-3xl font-bold mb-4 text-center"> List of publications </h1>
+          <h1 className="text-3xl font-bold mb-4 text-center">
+            {" "}
+            List of publications{" "}
+          </h1>
           <table className="table-auto text-lg mx-auto">
             <thead>
               <tr>
@@ -32,7 +35,10 @@ const IndexPage = () => {
                 <tr key={postItem.id}>
                   <td className="border px-4 py-2"> {postItem.title} </td>
                   <td className="border px-4 py-2"> {postItem.username} </td>
-                  <td className="border px-4 py-2"> {new Date(postItem.createdAt).toLocaleDateString()} </td>
+                  <td className="border px-4 py-2">
+                    {" "}
+                    {new Date(postItem.createdAt).toLocaleDateString()}{" "}
+                  </td>
                   <td className="border px-4 py-2">
                     <Button onClick={handleClickView(postItem.id)}>view</Button>
                   </td>
@@ -43,8 +49,7 @@ const IndexPage = () => {
         </div>
       )}
     </div>
-  )  
+  )
 }
-
 
 export default IndexPage

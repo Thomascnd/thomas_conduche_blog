@@ -1,4 +1,4 @@
-export const up = async (db) =>{
+export const up = async (db) => {
   await db.schema.createTable("users", (table) => {
     table.increments("id").primary()
     table.string("username").unique().notNullable()

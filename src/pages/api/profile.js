@@ -4,19 +4,14 @@ import { emailValidator, usernameValidator } from "@/utils/validators"
 import auth from "@/api/middlewares/auth"
 
 const handle = mw({
-  GET : [ 
+  GET: [
     auth,
-    async ({
-      models: { UserModel },
-      session: { id: userId },
-      res,
-    }) => {
+    async ({ models: { UserModel }, session: { id: userId }, res }) => {
       const user = await UserModel.query().findById(userId)
-      res.send(user,
-      )
-    }
-  ],    
-  PATCH:[
+      res.send(user)
+    },
+  ],
+  PATCH: [
     auth,
     validate({
       body: {
@@ -26,18 +21,19 @@ const handle = mw({
     }),
     async ({
       input: {
-        body: { username, email},
+        body: { username, email },
       },
       models: { UserModel },
       session: { id: userId },
       res,
     }) => {
-      const updatedUser = await UserModel.query().patchAndFetchById(userId, { username, email})
+      const updatedUser = await UserModel.query().patchAndFetchById(userId, {
+        username,
+        email,
+      })
       res.send(updatedUser)
-    }]
-  
+    },
+  ],
 })
 
 export default handle
-
-

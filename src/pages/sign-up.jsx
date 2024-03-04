@@ -1,5 +1,9 @@
 /* eslint-disable max-lines-per-function */
-import { emailValidator, passwordValidator, roleValidator } from "@/utils/validators"
+import {
+  emailValidator,
+  passwordValidator,
+  roleValidator,
+} from "@/utils/validators"
 import Alert from "@/web/components/ui/Alert"
 import Form from "@/web/components/ui/Form"
 import FormField from "@/web/components/ui/FormField"
