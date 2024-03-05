@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { useRouter } from "next/router"
 import Loader from "@/web/components/ui/Loader"
 import { useQuery, useMutation } from "@tanstack/react-query"

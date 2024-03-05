@@ -5,11 +5,11 @@ import SubmitButton from "@/web/components/ui/SubmitButton"
 import Loader from "@/web/components/ui/Loader"
 import Alert from "@/web/components/ui/Alert"
 import Link from "@/web/components/ui/Link"
-import {  useQuery, useMutation } from "@tanstack/react-query"
+import { useQuery, useMutation } from "@tanstack/react-query"
 import { Formik } from "formik"
 
 const EditProfile = () => {
-  const {isFetching: isFetchingUser, data: user,} = useQuery({
+  const { isFetching: isFetchingUser, data: user } = useQuery({
     queryKey: ["users"],
     queryFn: () => apiClient("/profile"),
   })
@@ -23,9 +23,7 @@ const EditProfile = () => {
   if (isSuccess) {
     return (
       <div className="flex flex-col gap-4">
-        <Alert>
-          your profile is updated
-        </Alert>
+        <Alert>your profile is updated</Alert>
         <p>
           <Link href="/">Go to list post page.</Link>
         </p>
@@ -39,7 +37,7 @@ const EditProfile = () => {
         <Loader />
       ) : (
         <>
-          <h1 className="text-3xl font-bold mb-4 text-center"> Update Profil </h1>
+          <h1 className="text-3xl font-bold mb-4 text-center">Update Profil</h1>
           <Formik
             initialValues={{
               username: user.username,
@@ -49,15 +47,25 @@ const EditProfile = () => {
             enableReinitialize
           >
             <Form>
-              <FormField name="username" label="Username" type="text" placeholder="Enter a username"/>
-              <FormField name="email" label="Email" type="text" placeholder="Enter a email"/>
+              <FormField
+                name="username"
+                label="Username"
+                type="text"
+                placeholder="Enter a username"
+              />
+              <FormField
+                name="email"
+                label="Email"
+                type="text"
+                placeholder="Enter a email"
+              />
               <SubmitButton>Save</SubmitButton>
             </Form>
           </Formik>
         </>
       )}
     </div>
-  )  
+  )
 }
 
 export default EditProfile

@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import Button from "@/web/components/ui/Button"
 import apiClient from "@/web/services/apiClient"
 import { useMutation, useQuery } from "@tanstack/react-query"

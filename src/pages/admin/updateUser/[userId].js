@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import Form from "@/web/components/ui/Form"
 import FormField from "@/web/components/ui/FormField"
 import apiClient from "@/web/services/apiClient"

@@ -15,7 +15,7 @@ const Header = () => {
   const router = useRouter()
   const handleSignOut = () => {
     signOut()
-    router.push("/sign-in") 
+    router.push("/sign-in")
   }
 
   return (
@@ -35,8 +35,10 @@ const Header = () => {
                   <MenuItem href="/admin">Admin</MenuItem>
                 )}
                 {session.role === "author" && (
-                  <><MenuItem href="/authorPostList">Author post</MenuItem>
-                  <MenuItem href="/createPost">Create post</MenuItem></>
+                  <>
+                    <MenuItem href="/authorPostList">Author post</MenuItem>
+                    <MenuItem href="/createPost">Create post</MenuItem>
+                  </>
                 )}
                 <li>
                   <Button
